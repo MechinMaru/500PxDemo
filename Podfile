@@ -6,7 +6,12 @@ target '500PxDemo' do
   use_frameworks!
 
   # Pods for 500PxDemo
+  pod 'R.swift'
+  pod 'RxSwift',    '~> 4.0'
+  pod 'RxCocoa',    '~> 4.0'
+  pod 'Moya/RxSwift', '~> 11.0'
 
+  
   target '500PxDemoTests' do
     inherit! :search_paths
     # Pods for testing

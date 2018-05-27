@@ -16,6 +16,15 @@
 		9DB8BA0120B9A62F00E954E3 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 9DB8B9FF20B9A62F00E954E3 /* LaunchScreen.storyboard */; };
 		9DB8BA0C20B9A63000E954E3 /* _00PxDemoTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DB8BA0B20B9A63000E954E3 /* _00PxDemoTests.swift */; };
 		9DB8BA1720B9A63000E954E3 /* _00PxDemoUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DB8BA1620B9A63000E954E3 /* _00PxDemoUITests.swift */; };
+		9DB8BA2820BB07B500E954E3 /* R.generated.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DB8BA2720BB07B500E954E3 /* R.generated.swift */; };
+		9DB8BA2F20BB086B00E954E3 /* AppConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DB8BA2E20BB086B00E954E3 /* AppConstants.swift */; };
+		9DB8BA3720BB0A3500E954E3 /* CategoryListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DB8BA3520BB0A3500E954E3 /* CategoryListViewController.swift */; };
+		9DB8BA3820BB0A3500E954E3 /* CategoryListViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DB8BA3620BB0A3500E954E3 /* CategoryListViewModel.swift */; };
+		9DB8BA3A20BB0A7400E954E3 /* BaseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DB8BA3920BB0A7400E954E3 /* BaseViewController.swift */; };
+		9DB8BA3C20BB0ABD00E954E3 /* BaseViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DB8BA3B20BB0ABD00E954E3 /* BaseViewModel.swift */; };
+		9DB8BA3F20BB0B6D00E954E3 /* CategoryTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DB8BA3E20BB0B6D00E954E3 /* CategoryTableViewCell.swift */; };
+		9DB8BA4120BB0C7800E954E3 /* CategoryModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DB8BA4020BB0C7800E954E3 /* CategoryModel.swift */; };
+		9DB8BA4420BB17E600E954E3 /* MainService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DB8BA4320BB17E600E954E3 /* MainService.swift */; };
 		D1A93EF59A59F1FF9796516F /* Pods_500PxDemoTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 66F98FDFE23AB1C5E55D5F96 /* Pods_500PxDemoTests.framework */; };
 /* End PBXBuildFile section */
 
@@ -55,6 +64,15 @@
 		9DB8BA1220B9A63000E954E3 /* 500PxDemoUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = 500PxDemoUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		9DB8BA1620B9A63000E954E3 /* _00PxDemoUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = _00PxDemoUITests.swift; sourceTree = "<group>"; };
 		9DB8BA1820B9A63000E954E3 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		9DB8BA2720BB07B500E954E3 /* R.generated.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = R.generated.swift; sourceTree = "<group>"; };
+		9DB8BA2E20BB086B00E954E3 /* AppConstants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppConstants.swift; sourceTree = "<group>"; };
+		9DB8BA3520BB0A3500E954E3 /* CategoryListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryListViewController.swift; sourceTree = "<group>"; };
+		9DB8BA3620BB0A3500E954E3 /* CategoryListViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryListViewModel.swift; sourceTree = "<group>"; };
+		9DB8BA3920BB0A7400E954E3 /* BaseViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseViewController.swift; sourceTree = "<group>"; };
+		9DB8BA3B20BB0ABD00E954E3 /* BaseViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseViewModel.swift; sourceTree = "<group>"; };
+		9DB8BA3E20BB0B6D00E954E3 /* CategoryTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryTableViewCell.swift; sourceTree = "<group>"; };
+		9DB8BA4020BB0C7800E954E3 /* CategoryModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryModel.swift; sourceTree = "<group>"; };
+		9DB8BA4320BB17E600E954E3 /* MainService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainService.swift; sourceTree = "<group>"; };
 		C9DB85278A414E3C0D543396 /* Pods-500PxDemo.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-500PxDemo.release.xcconfig"; path = "Pods/Target Support Files/Pods-500PxDemo/Pods-500PxDemo.release.xcconfig"; sourceTree = "<group>"; };
 		D6EFEDD2823A2A15ACBD31D6 /* Pods_500PxDemoUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_500PxDemoUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		DDAAE982F43D6934E5C1894C /* Pods-500PxDemoTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-500PxDemoTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-500PxDemoTests/Pods-500PxDemoTests.release.xcconfig"; sourceTree = "<group>"; };
@@ -115,6 +133,7 @@
 		9DB8B9EA20B9A62D00E954E3 = {
 			isa = PBXGroup;
 			children = (
+				9DB8BA2720BB07B500E954E3 /* R.generated.swift */,
 				9DB8B9F520B9A62D00E954E3 /* 500PxDemo */,
 				9DB8BA0A20B9A63000E954E3 /* 500PxDemoTests */,
 				9DB8BA1520B9A63000E954E3 /* 500PxDemoUITests */,
@@ -137,11 +156,13 @@
 		9DB8B9F520B9A62D00E954E3 /* 500PxDemo */ = {
 			isa = PBXGroup;
 			children = (
+				9DB8BA3420BB09CF00E954E3 /* Storyboard */,
+				9DB8BA2C20BB082300E954E3 /* Common */,
+				9DB8BA2A20BB07F000E954E3 /* Model */,
+				9DB8BA2920BB07DB00E954E3 /* Scenes */,
 				9DB8B9F620B9A62D00E954E3 /* AppDelegate.swift */,
 				9DB8B9F820B9A62D00E954E3 /* ViewController.swift */,
-				9DB8B9FA20B9A62D00E954E3 /* Main.storyboard */,
 				9DB8B9FD20B9A62F00E954E3 /* Assets.xcassets */,
-				9DB8B9FF20B9A62F00E954E3 /* LaunchScreen.storyboard */,
 				9DB8BA0220B9A62F00E954E3 /* Info.plist */,
 			);
 			path = 500PxDemo;
@@ -165,6 +186,84 @@
 			path = 500PxDemoUITests;
 			sourceTree = "<group>";
 		};
+		9DB8BA2920BB07DB00E954E3 /* Scenes */ = {
+			isa = PBXGroup;
+			children = (
+				9DB8BA3920BB0A7400E954E3 /* BaseViewController.swift */,
+				9DB8BA3B20BB0ABD00E954E3 /* BaseViewModel.swift */,
+				9DB8BA3020BB08A300E954E3 /* CategoryList */,
+				9DB8BA3220BB08C200E954E3 /* PhotoList */,
+				9DB8BA3320BB08CF00E954E3 /* PhotoPreview */,
+			);
+			path = Scenes;
+			sourceTree = "<group>";
+		};
+		9DB8BA2A20BB07F000E954E3 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				9DB8BA4020BB0C7800E954E3 /* CategoryModel.swift */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		9DB8BA2C20BB082300E954E3 /* Common */ = {
+			isa = PBXGroup;
+			children = (
+				9DB8BA4220BB173900E954E3 /* API */,
+				9DB8BA2E20BB086B00E954E3 /* AppConstants.swift */,
+			);
+			path = Common;
+			sourceTree = "<group>";
+		};
+		9DB8BA3020BB08A300E954E3 /* CategoryList */ = {
+			isa = PBXGroup;
+			children = (
+				9DB8BA3D20BB0B3700E954E3 /* Components */,
+				9DB8BA3520BB0A3500E954E3 /* CategoryListViewController.swift */,
+				9DB8BA3620BB0A3500E954E3 /* CategoryListViewModel.swift */,
+			);
+			path = CategoryList;
+			sourceTree = "<group>";
+		};
+		9DB8BA3220BB08C200E954E3 /* PhotoList */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = PhotoList;
+			sourceTree = "<group>";
+		};
+		9DB8BA3320BB08CF00E954E3 /* PhotoPreview */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = PhotoPreview;
+			sourceTree = "<group>";
+		};
+		9DB8BA3420BB09CF00E954E3 /* Storyboard */ = {
+			isa = PBXGroup;
+			children = (
+				9DB8B9FF20B9A62F00E954E3 /* LaunchScreen.storyboard */,
+				9DB8B9FA20B9A62D00E954E3 /* Main.storyboard */,
+			);
+			path = Storyboard;
+			sourceTree = "<group>";
+		};
+		9DB8BA3D20BB0B3700E954E3 /* Components */ = {
+			isa = PBXGroup;
+			children = (
+				9DB8BA3E20BB0B6D00E954E3 /* CategoryTableViewCell.swift */,
+			);
+			path = Components;
+			sourceTree = "<group>";
+		};
+		9DB8BA4220BB173900E954E3 /* API */ = {
+			isa = PBXGroup;
+			children = (
+				9DB8BA4320BB17E600E954E3 /* MainService.swift */,
+			);
+			path = API;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -173,6 +272,7 @@
 			buildConfigurationList = 9DB8BA1B20B9A63000E954E3 /* Build configuration list for PBXNativeTarget "500PxDemo" */;
 			buildPhases = (
 				21AE45491F349CDB59811A89 /* [CP] Check Pods Manifest.lock */,
+				9DB8BA2620BB075700E954E3 /* ShellScript */,
 				9DB8B9EF20B9A62D00E954E3 /* Sources */,
 				9DB8B9F020B9A62D00E954E3 /* Frameworks */,
 				9DB8B9F120B9A62D00E954E3 /* Resources */,
@@ -358,9 +458,22 @@
 			files = (
 			);
 			inputPaths = (
+				"${SRCROOT}/Pods/Target Support Files/Pods-500PxDemo/Pods-500PxDemo-frameworks.sh",
+				"${BUILT_PRODUCTS_DIR}/Alamofire/Alamofire.framework",
+				"${BUILT_PRODUCTS_DIR}/Moya/Moya.framework",
+				"${BUILT_PRODUCTS_DIR}/R.swift.Library/Rswift.framework",
+				"${BUILT_PRODUCTS_DIR}/Result/Result.framework",
+				"${BUILT_PRODUCTS_DIR}/RxCocoa/RxCocoa.framework",
+				"${BUILT_PRODUCTS_DIR}/RxSwift/RxSwift.framework",
 			);
 			name = "[CP] Embed Pods Frameworks";
 			outputPaths = (
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Alamofire.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Moya.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Rswift.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Result.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/RxCocoa.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/RxSwift.framework",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
@@ -381,6 +494,19 @@
 			shellPath = /bin/sh;
 			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-500PxDemo/Pods-500PxDemo-resources.sh\"\n";
 			showEnvVarsInLog = 0;
+		};
+		9DB8BA2620BB075700E954E3 /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"$PODS_ROOT/R.swift/rswift\" generate \"$SRCROOT\"";
 		};
 		9E88B1D08EAE9BB832744CC0 /* [CP] Embed Pods Frameworks */ = {
 			isa = PBXShellScriptBuildPhase;
@@ -452,8 +578,17 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				9DB8BA3720BB0A3500E954E3 /* CategoryListViewController.swift in Sources */,
 				9DB8B9F920B9A62D00E954E3 /* ViewController.swift in Sources */,
+				9DB8BA3820BB0A3500E954E3 /* CategoryListViewModel.swift in Sources */,
+				9DB8BA4120BB0C7800E954E3 /* CategoryModel.swift in Sources */,
 				9DB8B9F720B9A62D00E954E3 /* AppDelegate.swift in Sources */,
+				9DB8BA2820BB07B500E954E3 /* R.generated.swift in Sources */,
+				9DB8BA3C20BB0ABD00E954E3 /* BaseViewModel.swift in Sources */,
+				9DB8BA4420BB17E600E954E3 /* MainService.swift in Sources */,
+				9DB8BA3A20BB0A7400E954E3 /* BaseViewController.swift in Sources */,
+				9DB8BA2F20BB086B00E954E3 /* AppConstants.swift in Sources */,
+				9DB8BA3F20BB0B6D00E954E3 /* CategoryTableViewCell.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -630,7 +765,10 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = "";
 				INFOPLIST_FILE = 500PxDemo/Info.plist;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
 				PRODUCT_BUNDLE_IDENTIFIER = "com.github.mechinmaru.-00PxDemo";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 4.0;
@@ -646,7 +784,10 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = "";
 				INFOPLIST_FILE = 500PxDemo/Info.plist;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
 				PRODUCT_BUNDLE_IDENTIFIER = "com.github.mechinmaru.-00PxDemo";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 4.0;
@@ -662,7 +803,11 @@
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				CODE_SIGN_STYLE = Automatic;
 				INFOPLIST_FILE = 500PxDemoTests/Info.plist;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
 				PRODUCT_BUNDLE_IDENTIFIER = "com.github.mechinmaru.-00PxDemoTests";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 4.0;
@@ -679,7 +824,11 @@
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				CODE_SIGN_STYLE = Automatic;
 				INFOPLIST_FILE = 500PxDemoTests/Info.plist;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
 				PRODUCT_BUNDLE_IDENTIFIER = "com.github.mechinmaru.-00PxDemoTests";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 4.0;
@@ -695,7 +844,11 @@
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				CODE_SIGN_STYLE = Automatic;
 				INFOPLIST_FILE = 500PxDemoUITests/Info.plist;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
 				PRODUCT_BUNDLE_IDENTIFIER = "com.github.mechinmaru.-00PxDemoUITests";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 4.0;
@@ -711,7 +864,11 @@
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				CODE_SIGN_STYLE = Automatic;
 				INFOPLIST_FILE = 500PxDemoUITests/Info.plist;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
 				PRODUCT_BUNDLE_IDENTIFIER = "com.github.mechinmaru.-00PxDemoUITests";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 4.0;
