@@ -21,8 +21,17 @@ struct R: Rswift.Validatable {
     fileprivate init() {}
   }
   
-  /// This `R.file` struct is generated, and contains static references to 0 files.
+  /// This `R.file` struct is generated, and contains static references to 1 files.
   struct file {
+    /// Resource file `photos.json`.
+    static let photosJson = Rswift.FileResource(bundle: R.hostingBundle, name: "photos", pathExtension: "json")
+    
+    /// `bundle.url(forResource: "photos", withExtension: "json")`
+    static func photosJson(_: Void = ()) -> Foundation.URL? {
+      let fileResource = R.file.photosJson
+      return fileResource.bundle.url(forResource: fileResource)
+    }
+    
     fileprivate init() {}
   }
   
@@ -41,10 +50,14 @@ struct R: Rswift.Validatable {
     fileprivate init() {}
   }
   
-  /// This `R.reuseIdentifier` struct is generated, and contains static references to 1 reuse identifiers.
+  /// This `R.reuseIdentifier` struct is generated, and contains static references to 3 reuse identifiers.
   struct reuseIdentifier {
     /// Reuse identifier `CategoryCell`.
     static let categoryCell: Rswift.ReuseIdentifier<CategoryTableViewCell> = Rswift.ReuseIdentifier(identifier: "CategoryCell")
+    /// Reuse identifier `LoadingCell`.
+    static let loadingCell: Rswift.ReuseIdentifier<PhotoLoadingCollectionViewCell> = Rswift.ReuseIdentifier(identifier: "LoadingCell")
+    /// Reuse identifier `PhotoCell`.
+    static let photoCell: Rswift.ReuseIdentifier<PhotoCollectionViewCell> = Rswift.ReuseIdentifier(identifier: "PhotoCell")
     
     fileprivate init() {}
   }

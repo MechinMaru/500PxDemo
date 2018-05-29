@@ -10,7 +10,7 @@ import Foundation
 import Moya
 
 enum MainService {
-    case photos(categoryType: String)
+    case photos(categoryType: String, currentPage: Int)
 }
 
 
@@ -37,19 +37,25 @@ extension MainService: TargetType {
     
     /// Provides stub data for use in testing.
     var sampleData: Data {
+        switch self {
+        case .photos(_, let currentPage):
+            let fileURL = R.file.photosJson()!
+            let data = try! Data(contentsOf: fileURL)
+            return data
+        }
         return Data()
     }
     
     /// The type of HTTP task to be performed.
     var task: Task {
         switch self {
-        case .photos(let categoryType):
+        case .photos(let categoryType,let currentPage):
             return .requestParameters(parameters: ["feature": "fresh_today",
                                                    "only": categoryType,
                                                     "sort": "created_at",
-                                                    "page": 1,
+                                                    "page": currentPage,
                                                     "rpp": 10,
-                                                    "image_size": "3,6",
+                                                    "image_size": "3", //3,6
                                                     "consumer_key": AppConstants.consumerKey],
                                       encoding: URLEncoding.default)
             
