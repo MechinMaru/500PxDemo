@@ -49,8 +49,23 @@ struct R: Rswift.Validatable {
     fileprivate init() {}
   }
   
-  /// This `R.segue` struct is generated, and contains static references to 0 view controllers.
+  /// This `R.segue` struct is generated, and contains static references to 1 view controllers.
   struct segue {
+    /// This struct is generated for `CategoryListViewController`, and contains static references to 1 segues.
+    struct categoryListViewController {
+      /// Segue identifier `categoryListGoToPhotoListPage`.
+      static let categoryListGoToPhotoListPage: Rswift.StoryboardSegueIdentifier<UIKit.UIStoryboardSegue, CategoryListViewController, PhotoListViewViewController> = Rswift.StoryboardSegueIdentifier(identifier: "categoryListGoToPhotoListPage")
+      
+      /// Optionally returns a typed version of segue `categoryListGoToPhotoListPage`.
+      /// Returns nil if either the segue identifier, the source, destination, or segue types don't match.
+      /// For use inside `prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?)`.
+      static func categoryListGoToPhotoListPage(segue: UIKit.UIStoryboardSegue) -> Rswift.TypedStoryboardSegueInfo<UIKit.UIStoryboardSegue, CategoryListViewController, PhotoListViewViewController>? {
+        return Rswift.TypedStoryboardSegueInfo(segueIdentifier: R.segue.categoryListViewController.categoryListGoToPhotoListPage, segue: segue)
+      }
+      
+      fileprivate init() {}
+    }
+    
     fileprivate init() {}
   }
   
@@ -121,12 +136,18 @@ struct _R: Rswift.Validatable {
       let bundle = R.hostingBundle
       let categoryListViewController = StoryboardViewControllerResource<CategoryListViewController>(identifier: "CategoryListViewController")
       let name = "Main"
+      let photoListViewViewController = StoryboardViewControllerResource<PhotoListViewViewController>(identifier: "PhotoListViewViewController")
       
       func categoryListViewController(_: Void = ()) -> CategoryListViewController? {
         return UIKit.UIStoryboard(resource: self).instantiateViewController(withResource: categoryListViewController)
       }
       
+      func photoListViewViewController(_: Void = ()) -> PhotoListViewViewController? {
+        return UIKit.UIStoryboard(resource: self).instantiateViewController(withResource: photoListViewViewController)
+      }
+      
       static func validate() throws {
+        if _R.storyboard.main().photoListViewViewController() == nil { throw Rswift.ValidationError(description:"[R.swift] ViewController with identifier 'photoListViewViewController' could not be loaded from storyboard 'Main' as 'PhotoListViewViewController'.") }
         if _R.storyboard.main().categoryListViewController() == nil { throw Rswift.ValidationError(description:"[R.swift] ViewController with identifier 'categoryListViewController' could not be loaded from storyboard 'Main' as 'CategoryListViewController'.") }
       }
       

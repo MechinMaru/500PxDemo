@@ -10,13 +10,14 @@ import Foundation
 import RxSwift
 import RxCocoa
 
+
 protocol CategoryListViewModelInputs {
     func onSelectItemAt(_ indexPath: IndexPath)
-
 }
 
 protocol CategoryListViewModelOutputs {
     var onRequestShowRowData: Driver<[CategoryType]> { get }
+    var onRequestGoToPhotoListPage: Driver<CategoryType>! { get }
 }
 
 protocol CategoryListViewModelType {
@@ -26,15 +27,16 @@ protocol CategoryListViewModelType {
 
 class CategoryListViewModel: BaseViewModel, CategoryListViewModelType, CategoryListViewModelInputs, CategoryListViewModelOutputs {
 
-    var onRequestShowRowData: Driver<[CategoryType]> { return rowData.asDriver()}
+    var onRequestShowRowData: Driver<[CategoryType]> { return rowData.asDriver() }
+    var onRequestGoToPhotoListPage: Driver<CategoryType>!
     
-    private var rowData = Variable<[CategoryType]>(CategoryType.categoryList)
+    private var rowData = BehaviorRelay<[CategoryType]>(value: CategoryType.categoryList)
     let disposeBag = DisposeBag()
     
     override init() {
         super.init()
         
-        
+        onRequestGoToPhotoListPage = itemTrigger.asDriver(onErrorDriveWith: Driver.empty())
     }
     
     private let itemTrigger = PublishSubject<CategoryType>()

@@ -32,11 +32,12 @@ class CategoryListViewController: BaseViewController {
     
 
     private func bindInputs() {
-//        tableView.rx.itemSelected.asDriver().drive(onNext: { (<#IndexPath#>) in
-//            <#code#>
-//        }, onCompleted: <#T##(() -> Void)?##(() -> Void)?##() -> Void#>, onDisposed: <#T##(() -> Void)?##(() -> Void)?##() -> Void#>)
-        
-        
+        tableView.rx.itemSelected
+            .asDriver()
+            .drive(onNext: { [weak self] (indexPath) in
+                self?.viewModel.inputs.onSelectItemAt(indexPath)
+            })
+            .disposed(by: disposeBag)
     }
     
     private func bindOutput() {
@@ -51,15 +52,20 @@ class CategoryListViewController: BaseViewController {
         }
         .disposed(by: disposeBag)
         
+       
+        viewModel
+            .outputs
+            .onRequestGoToPhotoListPage
+            .drive(onNext: { (categoryType) in
+                self.performSegue(withIdentifier: R.segue.categoryListViewController.categoryListGoToPhotoListPage, sender: categoryType)
+            })
+            .disposed(by: disposeBag)
     }
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
+   
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
+        if let photoListVC = R.segue.categoryListViewController.categoryListGoToPhotoListPage(segue: segue),
+            let categoryType = sender as? CategoryType {
+            photoListVC.destination.config = PhotoListViewViewController.Config(categoryType: categoryType)
+        }
     }
-    */
-
 }

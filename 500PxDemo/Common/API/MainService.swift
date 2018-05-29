@@ -49,7 +49,8 @@ extension MainService: TargetType {
                                                     "sort": "created_at",
                                                     "page": 1,
                                                     "rpp": 10,
-                                                    "image_size": "3,6"],
+                                                    "image_size": "3,6",
+                                                    "consumer_key": AppConstants.consumerKey],
                                       encoding: URLEncoding.default)
             
         }
