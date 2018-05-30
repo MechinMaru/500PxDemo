@@ -11,6 +11,7 @@ target '500PxDemo' do
   pod 'RxCocoa',    '~> 4.0'
   pod 'Moya/RxSwift', '~> 11.0'
   pod 'AlamofireImage', '~> 3.3'
+  pod 'ImageViewer'
 
 
   

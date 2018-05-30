@@ -10,6 +10,8 @@ import Foundation
 import RxSwift
 import RxCocoa
 import Moya
+import ImageViewer
+import AlamofireImage
 
 enum PhotoCellType {
     case loadingCell
@@ -20,17 +22,18 @@ protocol PhotoListViewViewModelInputs {
     func onViewDidLoad()
     func onLoadMore()
     func onPullToRefresh()
+    func onSelectedItemAt(_ indexPath: IndexPath)
 }
 
 protocol PhotoListViewViewModelOutputs {
     var isRefreshing: Driver<Bool> { get }
     var onRequestShowErrorMessage: Driver<Error> { get }
     var rowData: Driver<[PhotoCellType]> { get }
-    
-    
+
     func itemAtIndexPath(_ indexPath: IndexPath) -> PhotoCellType
     var rowCount: Int { get }
-
+    var galleryData: [GalleryItem] { get }
+    var onRequestShowImageViewer: Driver<Int>! { get }
 }
 
 protocol PhotoListViewViewModelType {
@@ -48,11 +51,16 @@ class PhotoListViewViewModel: BaseViewModel, PhotoListViewViewModelType, PhotoLi
                                     })
     }
    
+    var galleryData: [GalleryItem] { return _photoData.value }
+    var onRequestShowImageViewer: Driver<Int>!
+
     private var _photoRawData = BehaviorRelay<[Photo]>(value: [Photo]())
     private let _rowData = BehaviorRelay<[PhotoCellType]>(value: [])
+    private var _photoData = BehaviorRelay<[GalleryItem]>(value: [])
     var rowData: Driver<[PhotoCellType]> { return _rowData.asDriver() }
     var rowCount: Int { return _rowData.value.count }
-
+    
+    private let downloader = ImageDownloader()
     private let _onRequestShowErrorMessage = PublishSubject<Error>()
     private let _currentPage = BehaviorRelay<Int>(value: 0)
     private let _totalPage = BehaviorRelay<Int?>(value: nil)
@@ -147,6 +155,41 @@ class PhotoListViewViewModel: BaseViewModel, PhotoListViewViewModelType, PhotoLi
             .drive(_rowData)
             .disposed(by: disposeBag)
         
+        _photoRawData.asDriver().map { [weak self](photos) -> [GalleryItem] in
+            guard let `self` = self else { return [] }
+            var galleryItems = [GalleryItem]()
+            
+            for photo in photos {
+                if let url = URL(string: photo.imageUrl[1]) {
+                    let urlRequest = URLRequest(url: url)
+                    let galleryItem = GalleryItem.image(fetchImageBlock: { [weak self] (completion) in
+                        self?.downloader.download(urlRequest, completion: { (response) in
+                            if let image = response.result.value {
+                                completion(image)
+                            }
+                        })
+                    })
+                    galleryItems.append(galleryItem)
+                }
+            }
+            return galleryItems
+        }
+        .drive(_photoData)
+        .disposed(by: disposeBag)
+        
+       onRequestShowImageViewer = selectedItemTrigger
+            .asDriver(onErrorDriveWith: Driver.empty())
+            .withLatestFrom(_rowData.asDriver()) { (indexPath, rowData) -> Int? in
+                if case PhotoCellType.photo = rowData[indexPath.item] {
+                    return indexPath.item
+                }else{
+                    return nil
+                }
+            }
+            .filter { $0 != nil }
+            .map {$0!}
+        
+        
     }
 
     private let viewDidLoadTrigger = PublishSubject<Void>()
@@ -171,6 +214,10 @@ class PhotoListViewViewModel: BaseViewModel, PhotoListViewViewModelType, PhotoLi
         return _rowData.value[indexPath.item]
     }
     
+    private var selectedItemTrigger = PublishSubject<IndexPath>()
+    func onSelectedItemAt(_ indexPath: IndexPath) {
+        selectedItemTrigger.onNext(indexPath)
+    }
     var inputs: PhotoListViewViewModelInputs { return self }
     var outputs: PhotoListViewViewModelOutputs { return self }                                         
 

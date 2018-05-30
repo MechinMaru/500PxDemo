@@ -9,6 +9,7 @@
 import UIKit
 import RxSwift
 import RxCocoa
+import ImageViewer
 
 class PhotoListViewViewController: BaseViewController {
 
@@ -71,6 +72,13 @@ class PhotoListViewViewController: BaseViewController {
                 self?.viewModel.inputs.onLoadMore()
             })
             .disposed(by: disposeBag)
+        
+            collectionView.rx.itemSelected
+                .asDriver()
+                .drive(onNext: { [weak self] (indexPath) in
+                    self?.viewModel.inputs.onSelectedItemAt(indexPath)
+                })
+                .disposed(by: disposeBag)
     }
     
     private func bindOutputs() {
@@ -115,6 +123,13 @@ class PhotoListViewViewController: BaseViewController {
                 let okAction = UIAlertAction(title: "OK", style: .default)
                 alertVC.addAction(okAction)
                 self?.navigationController?.present(alertVC, animated: true, completion: nil)
+            })
+            .disposed(by: disposeBag)
+        
+        viewModel.outputs.onRequestShowImageViewer
+            .drive(onNext: { [weak self] (startIndex) in
+                guard let `self` = self else { return }
+                self.presentImageGallery(GalleryViewController(startIndex: startIndex, itemsDataSource: self))
             })
             .disposed(by: disposeBag)
         
@@ -165,5 +180,14 @@ extension PhotoListViewViewController: UICollectionViewDelegateFlowLayout {
             return CGSize(width: cellWidth, height: cellWidth)
         }
     }
+}
+
+extension PhotoListViewViewController: GalleryItemsDataSource {
+    func itemCount() -> Int {
+        return viewModel.outputs.galleryData.count
+    }
     
+    func provideGalleryItem(_ index: Int) -> GalleryItem {
+        return viewModel.outputs.galleryData[index]
+    }
 }
