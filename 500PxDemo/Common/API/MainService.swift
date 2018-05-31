@@ -38,12 +38,12 @@ extension MainService: TargetType {
     /// Provides stub data for use in testing.
     var sampleData: Data {
         switch self {
-        case .photos(_, let currentPage):
+        case .photos:
             let fileURL = R.file.photosJson()!
             let data = try! Data(contentsOf: fileURL)
             return data
         }
-        return Data()
+//        return Data()
     }
     
     /// The type of HTTP task to be performed.

@@ -28,10 +28,10 @@ struct PhotoResponse: Codable {
 
 struct Photo: Codable {
     let id: Int
-    let name: String?
+    let name: String
     let description: String?
     let imageUrl: [String]
-    let user: User?
+    let user: User
     
     enum CodingKeys: String, CodingKey {
         case id
@@ -44,12 +44,12 @@ struct Photo: Codable {
 
 struct User: Codable {
     let id: Int
-    let username: String?
+    let username: String
     let firstname: String?
     let lastname: String?
     let city: String?
     let country: String?
-    let fullname: String?
+    let fullname: String
     let userPicUrl: String
     let upgradeStatus: Int
     

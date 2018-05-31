@@ -18,8 +18,13 @@ class PhotoListViewViewController: BaseViewController {
     }
     
     @IBOutlet weak var collectionView: UICollectionView!
-    private let refreshControl = UIRefreshControl()
+   
+    @IBOutlet var galleryFooterView: UIView!
+    @IBOutlet weak var titleLabel: UILabel!
+    @IBOutlet weak var authourLabel: UILabel!
+    @IBOutlet weak var authorImageView: UIImageView!
     
+    private let refreshControl = UIRefreshControl()
     lazy var viewModel: PhotoListViewViewModelType = {
 		return PhotoListViewViewModel(config)
 	}()
@@ -49,7 +54,9 @@ class PhotoListViewViewController: BaseViewController {
             collectionView.addSubview(refreshControl)
         }
         refreshControl.addTarget(self, action: #selector(refreshPhotoList(_:)), for: .valueChanged)
-//        collectionView.dataSource = self
+        
+        // setup Layout
+        authorImageView.layer.cornerRadius = authorImageView.frame.width / 2
     }
     
     private func bindInputs() {
@@ -94,6 +101,9 @@ class PhotoListViewViewController: BaseViewController {
             .rowData
             .asObservable()
             .observeOn(MainScheduler.asyncInstance)
+            .do(onNext: { [weak self](_) in
+//                self?.galleryViewController?.fetch
+            })
             .bind(to: collectionView.rx.items) { (collectionView, item, element) in
 //            .drive(collectionView.rx.items) { (collectionView, item, element) in
                 let indexPath = IndexPath(item: item, section: 0)
@@ -129,7 +139,45 @@ class PhotoListViewViewController: BaseViewController {
         viewModel.outputs.onRequestShowImageViewer
             .drive(onNext: { [weak self] (startIndex) in
                 guard let `self` = self else { return }
-                self.presentImageGallery(GalleryViewController(startIndex: startIndex, itemsDataSource: self))
+                let galleryConfiguration: [GalleryConfigurationItem] = [
+                    GalleryConfigurationItem.deleteButtonMode(.none),
+                    GalleryConfigurationItem.seeAllCloseButtonMode(.none),
+                    GalleryConfigurationItem.thumbnailsButtonMode(.none),
+                    GalleryConfigurationItem.footerViewLayout(FooterLayout.center(0))
+                ]
+                
+                let galleryViewController = GalleryViewController(startIndex: 0, itemsDataSource: self, configuration: galleryConfiguration)
+                self.galleryFooterView.frame = CGRect(x: 0, y: 0, width: self.view.frame.size.width, height: 120)
+                galleryViewController.footerView = self.galleryFooterView
+                
+                galleryViewController.landedPageAtIndexCompletion = { [weak self] (index) in
+                    guard let `self` = self else { return }
+                    
+                    let indexPath = IndexPath(item: index, section: 0)
+                    let photoCell = self.viewModel.outputs.itemAtIndexPath(indexPath)
+                    
+                    if case PhotoCellType.photo(let photo) = photoCell {
+                        self.titleLabel.text = photo.name
+                        let user = photo.user
+                        var informantionStr = user.fullname
+                        if let city = user.city,
+                            !city.isEmpty {
+                            informantionStr.append(", \(city)")
+                        }
+                        
+                        if let country = user.country,
+                            !country.isEmpty {
+                            informantionStr.append(", \(country)")
+                        }
+                        self.authourLabel.text = informantionStr
+                        
+                        if let imageUrl = URL(string: user.userPicUrl) {
+                            self.authorImageView.af_setImage(withURL: imageUrl, placeholderImage: R.image.person_grey())
+                        }
+                    }
+                    
+                }
+                self.presentImageGallery(galleryViewController)
             })
             .disposed(by: disposeBag)
         
@@ -139,33 +187,7 @@ class PhotoListViewViewController: BaseViewController {
         viewModel.inputs.onPullToRefresh()
     }
     
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
-    }
 }
-
-//extension PhotoListViewViewController: UICollectionViewDataSource {
-//    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-//        return viewModel.outputs.rowCount
-//    }
-//
-//    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-//        let element = viewModel.outputs.itemAtIndexPath(indexPath)
-//        switch element {
-//            case .loadingCell:
-//                let cell = collectionView.dequeueReusableCell(withReuseIdentifier: R.reuseIdentifier.loadingCell, for: indexPath)!
-//                cell.indicatorView.startAnimating()
-//                return cell
-//
-//            case .photo(let photo):
-//                let cell = collectionView.dequeueReusableCell(withReuseIdentifier: R.reuseIdentifier.photoCell, for: indexPath)!
-//                cell.configureLayoutWithModel(photo)
-//                return cell
-//
-//        }
-//    }
-//}
 
 extension PhotoListViewViewController: UICollectionViewDelegateFlowLayout {
     
