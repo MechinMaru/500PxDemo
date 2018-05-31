@@ -65,3 +65,21 @@ struct User: Codable {
         case upgradeStatus = "upgrade_status"
     }
 }
+
+extension User {
+    
+}
+
+extension Optional where Wrapped == String {
+    var withCommaOrEmpty: String {
+        switch self {
+        case .none:
+            break
+        case .some(let wrapped):
+            if !wrapped.isEmpty {
+                return ", \(wrapped)"
+            }
+        }
+        return ""
+    }
+}

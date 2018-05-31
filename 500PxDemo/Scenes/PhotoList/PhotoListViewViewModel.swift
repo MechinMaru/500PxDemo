@@ -30,9 +30,10 @@ protocol PhotoListViewViewModelOutputs {
     var onRequestShowErrorMessage: Driver<Error> { get }
     var rowData: Driver<[PhotoCellType]> { get }
 
-    func itemAtIndexPath(_ indexPath: IndexPath) -> PhotoCellType
-    var rowCount: Int { get }
+    func photoCellAtIndex(_ index: Int) -> PhotoCellType
+    
     var galleryData: [GalleryItem] { get }
+    
     var onRequestShowImageViewer: Driver<Int>! { get }
 }
 
@@ -58,7 +59,6 @@ class PhotoListViewViewModel: BaseViewModel, PhotoListViewViewModelType, PhotoLi
     private let _rowData = BehaviorRelay<[PhotoCellType]>(value: [])
     private var _photoData = BehaviorRelay<[GalleryItem]>(value: [])
     var rowData: Driver<[PhotoCellType]> { return _rowData.asDriver() }
-    var rowCount: Int { return _rowData.value.count }
     
     private let downloader = ImageDownloader()
     private let _onRequestShowErrorMessage = PublishSubject<Error>()
@@ -78,7 +78,11 @@ class PhotoListViewViewModel: BaseViewModel, PhotoListViewViewModelType, PhotoLi
         let pages = Observable.combineLatest(_currentPage, _totalPage, resultSelector: { (current: $0, total: $1) })
         
         Observable
-            .merge([viewDidLoadTrigger.asObservable(), loadMoreTrigger.asObservable(), pullToRefreshTrigger.asObservable()])
+            .merge([
+                loadMoreTrigger.asObservable(),
+                pullToRefreshTrigger.asObservable(),
+                viewDidLoadTrigger.asObservable()
+            ])
             .withLatestFrom(_isLoading)
             .filter { $0 == false }
             .withLatestFrom(pages)
@@ -155,27 +159,28 @@ class PhotoListViewViewModel: BaseViewModel, PhotoListViewViewModelType, PhotoLi
             .drive(_rowData)
             .disposed(by: disposeBag)
         
-        _photoRawData.asDriver().map { [weak self](photos) -> [GalleryItem] in
-            guard let `self` = self else { return [] }
-            var galleryItems = [GalleryItem]()
-            
-            for photo in photos {
-                if let url = URL(string: photo.imageUrl[1]) {
-                    let urlRequest = URLRequest(url: url)
-                    let galleryItem = GalleryItem.image(fetchImageBlock: { [weak self] (completion) in
-                        self?.downloader.download(urlRequest, completion: { (response) in
-                            if let image = response.result.value {
-                                completion(image)
-                            }
+        _photoRawData.asDriver()
+            .map { [weak self] (photos) -> [GalleryItem] in
+                guard let `self` = self else { return [] }
+                var galleryItems = [GalleryItem]()
+                
+                for photo in photos {
+                    if let url = URL(string: photo.imageUrl[1]) {
+                        let urlRequest = URLRequest(url: url)
+                        let galleryItem = GalleryItem.image(fetchImageBlock: { [weak self] (completion) in
+                            self?.downloader.download(urlRequest, completion: { (response) in
+                                if let image = response.result.value {
+                                    completion(image)
+                                }
+                            })
                         })
-                    })
-                    galleryItems.append(galleryItem)
+                        galleryItems.append(galleryItem)
+                    }
                 }
+                return galleryItems
             }
-            return galleryItems
-        }
-        .drive(_photoData)
-        .disposed(by: disposeBag)
+            .drive(_photoData)
+            .disposed(by: disposeBag)
         
        onRequestShowImageViewer = selectedItemTrigger
             .asDriver(onErrorDriveWith: Driver.empty())
@@ -210,8 +215,8 @@ class PhotoListViewViewModel: BaseViewModel, PhotoListViewViewModelType, PhotoLi
         pullToRefreshTrigger.onNext(())
     }
     
-    func itemAtIndexPath(_ indexPath: IndexPath) -> PhotoCellType {
-        return _rowData.value[indexPath.item]
+    func photoCellAtIndex(_ index: Int) -> PhotoCellType {
+        return _rowData.value[index]
     }
     
     private var selectedItemTrigger = PublishSubject<IndexPath>()

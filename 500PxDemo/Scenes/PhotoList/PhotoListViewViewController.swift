@@ -76,7 +76,9 @@ class PhotoListViewViewController: BaseViewController {
             }
             .filter { $0 }
             .drive(onNext: { [weak self] (_) in
-                self?.viewModel.inputs.onLoadMore()
+                if self?.presentedViewController == nil {
+                    self?.viewModel.inputs.onLoadMore()                    
+                }
             })
             .disposed(by: disposeBag)
         
@@ -101,9 +103,6 @@ class PhotoListViewViewController: BaseViewController {
             .rowData
             .asObservable()
             .observeOn(MainScheduler.asyncInstance)
-            .do(onNext: { [weak self](_) in
-//                self?.galleryViewController?.fetch
-            })
             .bind(to: collectionView.rx.items) { (collectionView, item, element) in
 //            .drive(collectionView.rx.items) { (collectionView, item, element) in
                 let indexPath = IndexPath(item: item, section: 0)
@@ -146,37 +145,27 @@ class PhotoListViewViewController: BaseViewController {
                     GalleryConfigurationItem.footerViewLayout(FooterLayout.center(0))
                 ]
                 
-                let galleryViewController = GalleryViewController(startIndex: 0, itemsDataSource: self, configuration: galleryConfiguration)
+                let galleryViewController = GalleryViewController(startIndex: startIndex, itemsDataSource: self, configuration: galleryConfiguration)
                 self.galleryFooterView.frame = CGRect(x: 0, y: 0, width: self.view.frame.size.width, height: 120)
                 galleryViewController.footerView = self.galleryFooterView
                 
                 galleryViewController.landedPageAtIndexCompletion = { [weak self] (index) in
+                    
                     guard let `self` = self else { return }
                     
-                    let indexPath = IndexPath(item: index, section: 0)
-                    let photoCell = self.viewModel.outputs.itemAtIndexPath(indexPath)
+                    let photoCell = self.viewModel.outputs.photoCellAtIndex(index)
                     
-                    if case PhotoCellType.photo(let photo) = photoCell {
-                        self.titleLabel.text = photo.name
-                        let user = photo.user
-                        var informantionStr = user.fullname
-                        if let city = user.city,
-                            !city.isEmpty {
-                            informantionStr.append(", \(city)")
-                        }
-                        
-                        if let country = user.country,
-                            !country.isEmpty {
-                            informantionStr.append(", \(country)")
-                        }
-                        self.authourLabel.text = informantionStr
-                        
-                        if let imageUrl = URL(string: user.userPicUrl) {
-                            self.authorImageView.af_setImage(withURL: imageUrl, placeholderImage: R.image.person_grey())
-                        }
+                    guard case let PhotoCellType.photo(photo) = photoCell else { return }
+                    let user = photo.user
+                    
+                    self.titleLabel.text = photo.name
+                    self.authourLabel.text = "\(user.fullname)\(user.city.withCommaOrEmpty)\(user.country.withCommaOrEmpty)"
+                    
+                    if let imageUrl = URL(string: user.userPicUrl) {
+                        self.authorImageView.af_setImage(withURL: imageUrl, placeholderImage: R.image.person_grey())
                     }
-                    
                 }
+                
                 self.presentImageGallery(galleryViewController)
             })
             .disposed(by: disposeBag)
@@ -192,7 +181,7 @@ class PhotoListViewViewController: BaseViewController {
 extension PhotoListViewViewController: UICollectionViewDelegateFlowLayout {
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        let cellType = viewModel.outputs.itemAtIndexPath(indexPath)
+        let cellType = viewModel.outputs.photoCellAtIndex(indexPath.item)
         switch cellType {
         case .loadingCell:
             return CGSize(width: collectionView.frame.size.width, height: 44)

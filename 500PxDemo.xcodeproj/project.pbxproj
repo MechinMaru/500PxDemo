@@ -32,6 +32,7 @@
 		9DB8BA3F20BB0B6D00E954E3 /* CategoryTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DB8BA3E20BB0B6D00E954E3 /* CategoryTableViewCell.swift */; };
 		9DB8BA4120BB0C7800E954E3 /* CategoryModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DB8BA4020BB0C7800E954E3 /* CategoryModel.swift */; };
 		9DB8BA4420BB17E600E954E3 /* MainService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DB8BA4320BB17E600E954E3 /* MainService.swift */; };
+		9DC162DE20C0800C00967CC1 /* error.json in Resources */ = {isa = PBXBuildFile; fileRef = 9DC162DD20C0800C00967CC1 /* error.json */; };
 		D1A93EF59A59F1FF9796516F /* Pods_500PxDemoTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 66F98FDFE23AB1C5E55D5F96 /* Pods_500PxDemoTests.framework */; };
 /* End PBXBuildFile section */
 
@@ -87,6 +88,7 @@
 		9DB8BA3E20BB0B6D00E954E3 /* CategoryTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryTableViewCell.swift; sourceTree = "<group>"; };
 		9DB8BA4020BB0C7800E954E3 /* CategoryModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryModel.swift; sourceTree = "<group>"; };
 		9DB8BA4320BB17E600E954E3 /* MainService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainService.swift; sourceTree = "<group>"; };
+		9DC162DD20C0800C00967CC1 /* error.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = error.json; sourceTree = "<group>"; };
 		C9DB85278A414E3C0D543396 /* Pods-500PxDemo.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-500PxDemo.release.xcconfig"; path = "Pods/Target Support Files/Pods-500PxDemo/Pods-500PxDemo.release.xcconfig"; sourceTree = "<group>"; };
 		D6EFEDD2823A2A15ACBD31D6 /* Pods_500PxDemoUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_500PxDemoUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		DDAAE982F43D6934E5C1894C /* Pods-500PxDemoTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-500PxDemoTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-500PxDemoTests/Pods-500PxDemoTests.release.xcconfig"; sourceTree = "<group>"; };
@@ -173,6 +175,7 @@
 			isa = PBXGroup;
 			children = (
 				9D85AC5520BDB225006D3F60 /* photos.json */,
+				9DC162DD20C0800C00967CC1 /* error.json */,
 			);
 			path = StubFiles;
 			sourceTree = "<group>";
@@ -426,6 +429,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				9DC162DE20C0800C00967CC1 /* error.json in Resources */,
 				9D85AC5620BDB225006D3F60 /* photos.json in Resources */,
 				9DB8BA0120B9A62F00E954E3 /* LaunchScreen.storyboard in Resources */,
 				9DB8B9FE20B9A62F00E954E3 /* Assets.xcassets in Resources */,

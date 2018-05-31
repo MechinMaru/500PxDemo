@@ -38,7 +38,13 @@ extension MainService: TargetType {
     /// Provides stub data for use in testing.
     var sampleData: Data {
         switch self {
-        case .photos:
+        case .photos(_, let currentPage):
+            if currentPage == 3 {
+                let fileURL = R.file.errorJson()!
+                let data = try! Data(contentsOf: fileURL)
+                return data
+                
+            }
             let fileURL = R.file.photosJson()!
             let data = try! Data(contentsOf: fileURL)
             return data
