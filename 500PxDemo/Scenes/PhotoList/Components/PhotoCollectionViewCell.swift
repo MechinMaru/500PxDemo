@@ -26,14 +26,5 @@ class PhotoCollectionViewCell: UICollectionViewCell {
         if let imageUrl = URL(string: model.imageUrl[0]) {
             imageView.af_setImage(withURL: imageUrl)
         }
-//        if let imageUrl = URL(string: model.imageUrl[0]),
-//            let title = model.name,
-//            let user = model.user,
-//            let fullname = user.fullname {
-//                authorLabel.text = fullname
-//                titleLabel.text = title
-//                imageView.af_setImage(withURL: imageUrl)
-//
-//        }
     }
 }

@@ -46,6 +46,7 @@ class PhotoListViewViewController: BaseViewController {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
+    
     private func setupView() {
         self.title = config.categoryType.categoryName
         if #available(iOS 10.0, *) {
@@ -82,12 +83,12 @@ class PhotoListViewViewController: BaseViewController {
             })
             .disposed(by: disposeBag)
         
-            collectionView.rx.itemSelected
-                .asDriver()
-                .drive(onNext: { [weak self] (indexPath) in
-                    self?.viewModel.inputs.onSelectedItemAt(indexPath)
-                })
-                .disposed(by: disposeBag)
+        collectionView.rx.itemSelected
+            .asDriver()
+            .drive(onNext: { [weak self] (indexPath) in
+                self?.viewModel.inputs.onSelectedItemAt(indexPath)
+            })
+            .disposed(by: disposeBag)
     }
     
     private func bindOutputs() {
@@ -169,7 +170,6 @@ class PhotoListViewViewController: BaseViewController {
                 self.presentImageGallery(galleryViewController)
             })
             .disposed(by: disposeBag)
-        
     }
     
     @objc private func refreshPhotoList (_ sender: Any) {

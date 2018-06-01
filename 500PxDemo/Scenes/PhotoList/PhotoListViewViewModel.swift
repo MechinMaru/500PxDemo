@@ -29,11 +29,8 @@ protocol PhotoListViewViewModelOutputs {
     var isRefreshing: Driver<Bool> { get }
     var onRequestShowErrorMessage: Driver<Error> { get }
     var rowData: Driver<[PhotoCellType]> { get }
-
     func photoCellAtIndex(_ index: Int) -> PhotoCellType
-    
     var galleryData: [GalleryItem] { get }
-    
     var onRequestShowImageViewer: Driver<Int>! { get }
 }
 
